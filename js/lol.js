@@ -80,5 +80,5 @@ function addMarker(place) {
         });
     });
 }
-performSearch();
-addMarker();
+  performSearch();
+  addMarker();

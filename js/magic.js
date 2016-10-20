@@ -1,10 +1,12 @@
 var geo = {
   local: {
-    longitude: "",
-    latitude: "",
+    longitude: null,
+    latitude: null,
     positionFound: false
-  },
-  location: (function(){
+  }
+};
+
+geo.location = function(){
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position){
         geo.local.longitude = position.coords.longitude;
@@ -12,26 +14,23 @@ var geo = {
         geo.local.positionFound = true;
       });
     }
-  })()
-};
+}();
+
+console.log(geo.local.latitude + "fooBar");
 
 var map;
 var infoWindow;
 var service;
 
 function initMap() {
-  var userLocation = {
-  lat: geo.local.latitude,
-  lng: geo.local.longitude
-}
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: userLocation,
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: {lat:geo.local.latitude, lng: geo.local.longitude  },
     zoom: 15,
     styles: [{
-      stylers: [{ visibility: 'simplified' }]
+      stylers: [{ visibility: "simplified"}]
     }, {
-      elementType: 'labels',
-      stylers: [{ visibility: 'off' }]
+      elementType: "labels",
+      stylers: [{ visibility: "off"}]
     }]
   });
 
@@ -40,13 +39,13 @@ function initMap() {
 
   // The idle event is a debounced event, so we can query & listen without
   // throwing too many requests at the server.
-  map.addListener('idle', performSearch);
+  map.addListener("idle", performSearch);
 }
 
 function performSearch() {
   var request = {
     bounds: map.getBounds(),
-    keyword: 'tires'
+    keyword: "starbucks"
   };
   service.radarSearch(request, callback);
 }
@@ -66,13 +65,13 @@ function addMarker(place) {
     map: map,
     position: place.geometry.location,
     icon: {
-      url: 'http://maps.gstatic.com/mapfiles/circle.png',
+      url: "http://maps.gstatic.com/mapfiles/circle.png",
       anchor: new google.maps.Point(10, 10),
       scaledSize: new google.maps.Size(10, 17)
     }
   });
 
-  google.maps.event.addListener(marker, 'click', function() {
+  google.maps.event.addListener(marker, "click", function() {
     service.getDetails(place, function(result, status) {
       if (status !== google.maps.places.PlacesServiceStatus.OK) {
         console.error(status);
@@ -83,6 +82,7 @@ function addMarker(place) {
     });
   });
 }
+
 
 setTimeout(function() {
   initMap();
