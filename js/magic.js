@@ -1,6 +1,8 @@
 var map;
 var service;
 var infowindow;
+var results = [];
+var queryL;
 
 var food = {
   mexican: "mexican food",
@@ -28,17 +30,6 @@ geo.location = function(){
       });
     }
 }();
-
-var viewModel = function() {
-  this.checkedOption = ko.observable();
-  this.mexican = ko.computed({
-  
-      }
-    }
-  )
-
-}
-
 console.log(geo.local.latitude + "fooBar");
 
 
@@ -87,6 +78,23 @@ function initMap() {
       });
     }
 
-setTimeout(function() {
+    var viewModel = function() {
+
+
+
+
+      var listPlaces = function() {
+        for (var i = 0; i < results.length; i++) {
+        this.allItems = ko.observableArray([results[i]]);
+        }
+      };
+    }
+
+
+
+
+
+/*setTimeout(function() {
   initMap();
 }, 5000);
+*/

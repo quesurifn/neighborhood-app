@@ -11,16 +11,19 @@
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
 
-          <h1 class="text-center">It's been a long night...</h1>
           <h2 class="text-center">Coffee, Pizza or Tacos?</h2>
 
-          <div id="map">
+          <div id="map"></div>
+
+          <div class="cusine" data-bind="visible: food">
+            <label class="radio-inline"><input type="radio" name="optradio" value="mexican" data-bind="checked: typeOfFood">Tacos</input></label>
+            <label class="radio-inline"><input type="radio" name="optradio" value="pizza" data-bind="checked: typeOfFood">Pizza</input></label>
+            <label class="radio-inline"><input type="radio" name="optradio" value="coffee" data-bind="checked: typeOfFood">Coffee</input></label>
           </div>
 
-          <div class="cusine">
-            <label class="radio-inline"><input type="radio" name="optradio" value="mexican" data-bind="checkedOption">Tacos</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="pizza" data-bind="checkedOption">Pizza</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="coffee" data-bind="checkedOption">Coffee</input></label>
+
+          <div class="list">
+            <select multiple="multiple" data-bind="options:allItems" ></select>
           </div>
 
         </div>
