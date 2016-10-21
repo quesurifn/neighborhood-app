@@ -1,7 +1,20 @@
+var map;
+var service;
+var infowindow;
+
+var food = {
+  mexican: "mexican food",
+  pizza: "italian food",
+  coffee: {
+    venue: "cafe",
+    keyword: "coffee"
+  }
+};
+
 var geo = {
   local: {
-    longitude: null,
-    latitude: null,
+    longitude: "",
+    latitude: "",
     positionFound: false
   }
 };
@@ -16,73 +29,63 @@ geo.location = function(){
     }
 }();
 
+var viewModel = function() {
+  this.checkedOption = ko.observable();
+  this.mexican = ko.computed({
+  
+      }
+    }
+  )
+
+}
+
 console.log(geo.local.latitude + "fooBar");
 
-var map;
-var infoWindow;
-var service;
 
 function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: {lat:geo.local.latitude, lng: geo.local.longitude  },
-    zoom: 15,
-    styles: [{
-      stylers: [{ visibility: "simplified"}]
-    }, {
-      elementType: "labels",
-      stylers: [{ visibility: "off"}]
-    }]
-  });
+      var userLocation = new google.maps.LatLng(geo.local.latitude, geo.local.longitude);
+      console.log(geo.local.latitude);
+      console.log(geo.local.longitude);
 
-  infoWindow = new google.maps.InfoWindow();
-  service = new google.maps.places.PlacesService(map);
 
-  // The idle event is a debounced event, so we can query & listen without
-  // throwing too many requests at the server.
-  map.addListener("idle", performSearch);
-}
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: userLocation,
+        zoom: 11
+      });
 
-function performSearch() {
-  var request = {
+    var request = {
+    location: userLocation,
     bounds: map.getBounds(),
-    keyword: "starbucks"
+    query: 'italian food',
+    type: 'restaurant',
+    openNow: true
+
   };
-  service.radarSearch(request, callback);
+  infowindow = new google.maps.InfoWindow();
+  service = new google.maps.places.PlacesService(map);
+  service.textSearch(request, callback);
 }
 
-function callback(results, status) {
-  if (status !== google.maps.places.PlacesServiceStatus.OK) {
-    console.error(status);
-    return;
-  }
-  for (var i = 0, result; result = results[i]; i++) {
-    addMarker(result);
-  }
-}
-
-function addMarker(place) {
-  var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location,
-    icon: {
-      url: "http://maps.gstatic.com/mapfiles/circle.png",
-      anchor: new google.maps.Point(10, 10),
-      scaledSize: new google.maps.Size(10, 17)
-    }
-  });
-
-  google.maps.event.addListener(marker, "click", function() {
-    service.getDetails(place, function(result, status) {
-      if (status !== google.maps.places.PlacesServiceStatus.OK) {
-        console.error(status);
-        return;
+    function callback(results, status) {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+          createMarker(results[i]);
+        }
       }
-      infoWindow.setContent(result.name);
-      infoWindow.open(map, marker);
-    });
-  });
-}
+    }
 
+    function createMarker(place) {
+      var placeLoc = place.geometry.location;
+      var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location
+      });
+
+      google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent("<div><strong>" + place.name + "</strong><br>" + place.formatted_address + "<br>" + place.rating );
+        infowindow.open(map, this);
+      });
+    }
 
 setTimeout(function() {
   initMap();

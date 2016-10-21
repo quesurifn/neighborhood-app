@@ -10,41 +10,23 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
-          <h1>Restaruant Finder</h1>
+
+          <h1 class="text-center">It's been a long night...</h1>
+          <h2 class="text-center">Coffee, Pizza or Tacos?</h2>
+
           <div id="map">
           </div>
 
           <div class="cusine">
-            <h3>Cusine</h3>
-            <label class="radio-inline"><input type="radio" name="optradio" value="">Mexican</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="">American</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="">Italian</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="">Chinese</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="">Thai</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="">Middle Eastern</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="">Tapas</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="">Mediteranian</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="">Indian</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="">Pizza</input></label>
-          </div>
-
-          <div class="price">
-            <h3>Budget</h3>
-            <label class="radio-inline"><input type="radio" name="optradio" value="">Inexpensive</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="">Relatively Inexpensive</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="">Pricey</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="">Very Pricey</input></label>
-          </div>
-
-          <div class="Options">
-            <h3>Additional Filters</h3>
-            <label class="checkbox-inline"><input type="checkbox" value="">Open Now</input></label>
-            <label class="checkbox-inline"><input type="checkbox" value="">Zagat Rated Only</input></label>
+            <label class="radio-inline"><input type="radio" name="optradio" value="mexican" data-bind="checkedOption">Tacos</input></label>
+            <label class="radio-inline"><input type="radio" name="optradio" value="pizza" data-bind="checkedOption">Pizza</input></label>
+            <label class="radio-inline"><input type="radio" name="optradio" value="coffee" data-bind="checkedOption">Coffee</input></label>
           </div>
 
         </div>
       </div>
     </div>
+    <script>https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js</script>
     <script async defer
        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb93XLBWJZDwVI0oHxvJShMejbxhdEp4w&callback=initMap&libraries=places,visualization">
    </script>
