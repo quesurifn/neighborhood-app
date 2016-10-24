@@ -82,10 +82,6 @@ function initMap() {
 
     var viewModel = function() {
       food: ko.observable
-
-
-
-
       var listPlaces = function() {
         for (var i = 0; i < results.length; i++) {
         this.allItems = ko.observableArray([results[i]]);
