@@ -2,7 +2,8 @@ var map;
 var service;
 var infowindow;
 var results = [];
-var allResults = ko.observableArray([]);
+var allResults = [];
+var markerResults = ko.observableArray([]);
 
 var food = {
   mexican: "mexican food",
@@ -65,13 +66,16 @@ function initMap() {
 
     function callback(results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        for (var i = 0; i < results.length; i++) {
-          allResults.push(results);
+          allResults = results;
+          markerResults.push(results);
           console.log(allResults);
-          createMarker(allResults);
+          for (var j = 0; j < allResults.length; j++) {
+            createMarker(allResults[j]);
+            allResults.push(results);
+            console.log(allResults);
+            }
           }
         }
-      }
 
 
     function createMarker(place) {
