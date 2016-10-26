@@ -9,21 +9,21 @@
   <body>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-12">
 
           <h2 class="text-center">Coffee, Pizza or Tacos?</h2>
 
           <div id="map"></div>
 
           <div class="cusine" data-bind="visible: food">
-            <label class="radio-inline"><input type="radio" name="optradio" value="mexican" data-bind="checked: typeOfFood">Tacos</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="pizza" data-bind="checked: typeOfFood">Pizza</input></label>
-            <label class="radio-inline"><input type="radio" name="optradio" value="coffee" data-bind="checked: typeOfFood">Coffee</input></label>
+            <button type="button" data-bind="click: coffee" class="btn">Coffee</button>
+            <button type="button" data-bind="click: tacos" class="btn">Tacos</button>
+            <button type="button" data-bind="click: pizza" class="btn">Pizza</button>
           </div>
 
 
           <div class="list">
-            <select multiple="multiple" data-bind="options:allItems" ></select>
+            <select multiple="multiple" data-bind="options:allResults" ></select>
           </div>
 
         </div>
