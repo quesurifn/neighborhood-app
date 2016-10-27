@@ -2,41 +2,56 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Neighborhood Map</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/master.css" media="screen" title="no title">
   </head>
+
   <body>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12">
-
-          <h2 class="text-center">Coffee, Pizza or Tacos?</h2>
-
-          <div id="map"></div>
-
-          <div class="cusine" data-bind="visible: food">
-            <button type="button" data-bind="click: coffee" class="btn">Coffee</button>
-            <button type="button" data-bind="click: tacos" class="btn">Tacos</button>
-            <button type="button" data-bind="click: pizza" class="btn">Pizza</button>
-          </div>
 
 
-          <div class="list">
-            <select multiple="multiple" data-bind="options:markerResults" ></select>
-          </div>
+    <div class="col-md-4" id="list">
+      <ul data-bind="foreach: markerResults">
+        <li>
+            <stong><span data-bind:"text: $data.name"></span></strong>
+            <span data-bind:"text: $data.formatted_address"></span>
+            <span data-bind:"text: $data.rating"></span>
+        </li>
+      </ul>
 
+
+      <!--<select multiple="multiple" data-bind="options:markerResults, optionsText: function(item) {
+          return item.name +' '+ item.formatted_address
+        }">
+        </select>
+    </div> -->
+  </div>
+
+
+
+        <div class="col-md-8">
+          <div id="map">If you are seeing this, Google Maps is being tempramental. Please refresh the page and try again.</div>
+
+
+
+        <div class="cusine text-center" data-bind="visible: food">
+          <button type="button" data-bind="click: coffee" class="btn">Coffee</button>
+          <button type="button" data-bind="click: tacos" class="btn">Tacos</button>
+          <button type="button" data-bind="click: pizza" class="btn">Pizza</button>
         </div>
       </div>
     </div>
-    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js"></script>
-    <script async
-       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb93XLBWJZDwVI0oHxvJShMejbxhdEp4w&callback=initMap&libraries=places,visualization">
-   </script>
+  </div>
+
+<script src="js/knockout-3.4.0.js"></script>
 <script src="js/magic.js" type="text/javascript"></script>
-<script
-  src="http://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script async
+   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb93XLBWJZDwVI0oHxvJShMejbxhdEp4w&callback=initMap&libraries=places,visualization">
+</script>
+
   </body>
 </html>

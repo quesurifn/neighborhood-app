@@ -2,7 +2,7 @@ var map;
 var service;
 var infowindow;
 var results = [];
-var allResults = [];
+var allResults = []
 var markerResults = ko.observableArray([]);
 
 var food = {
@@ -67,7 +67,8 @@ function initMap() {
     function callback(results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
           allResults = results;
-          markerResults.push(results);
+          markerResults(results);
+          console.log(markerResults);
           console.log(allResults);
           for (var j = 0; j < allResults.length; j++) {
             createMarker(allResults[j]);

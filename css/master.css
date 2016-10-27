@@ -1,6 +1,26 @@
 #map {
   width: 100%;
-  height: 400px;
+  height: 100vh;
   background-color: grey;
   margin-top: 1em;
+}
+
+div.cusine {
+  margin-top: -8vh;
+  z-index: 1;
+  position: relative;
+}
+
+#list {
+  background-color: #1b1b1b;
+  height: 100vh;
+}
+
+#list > li {
+  color: white;
+}
+
+.btn {
+  background-color: #1b1b1b;
+  color: white;
 }
