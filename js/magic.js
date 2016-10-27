@@ -3,7 +3,8 @@ var service;
 var infowindow;
 var results = [];
 var allResults = []
-var markerResults = ko.observableArray([]);
+var self = this;
+self.markerResults = ko.observableArray([]);
 
 var food = {
   mexican: "mexican food",
@@ -80,7 +81,6 @@ function initMap() {
 
 
     function createMarker(place) {
-      var placeLoc = place.geometry.location;
       var marker = new google.maps.Marker({
         map: map,
         animation: google.maps.Animation.DROP,
@@ -109,6 +109,7 @@ var viewModel = function() {
   self.queryL = ko.observable("");
   self.typeL = ko.observable("");
   self.typeOfFood = ko.observable();
+  self.markerResults;
 
 self.tacos = function() {
   self.queryL(self.food().mexican);
