@@ -88,6 +88,8 @@ function initMap() {
       });
 
       google.maps.event.addListener(marker, "click", function() {
+        map.setCenter(this.getPosition());
+        map.setZoom(11);
         if (place.rating == undefined) {
           infowindow.setContent("<div><strong>" + place.name + "</strong><br>" + place.formatted_address + "<br>");
         } else {
@@ -95,6 +97,7 @@ function initMap() {
         }
         infowindow.open(map, this);
       });
+
     }
 
 
