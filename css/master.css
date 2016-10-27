@@ -17,11 +17,20 @@ div.cusine {
   height: 100vh;
 }
 
-#list > li {
+span {
   color: white;
 }
 
 .btn {
   background-color: #1b1b1b;
   color: white;
+}
+
+
+li {
+  color: white;
+}
+
+ul {
+  padding-top: 2em;
 }

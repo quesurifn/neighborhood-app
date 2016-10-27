@@ -15,10 +15,10 @@
 
     <div class="col-md-3" id="list">
       <ul data-bind="foreach: markerResults">
-        <li>
-            <stong><span data-bind="text: name"></span></strong>
-            <span data-bind="text: formatted_address"></span>
-            <span data-bind="text: rating"></span>
+        <li style="">
+            <stong data-bind="text: $data.name"</strong>
+            <span data-bind="text: $data.formatted_address"></span>
+            <span data-bind="text: $data.rating"></span>
         </li>
       </ul>
       <!--<select multiple="multiple" data-bind="options:markerResults, optionsText: function(item) {
