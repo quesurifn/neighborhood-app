@@ -1,9 +1,5 @@
 var map, service, infowindow;
 var results, allResults = [];
-var self = this;
-self.markerResults = ko.observableArray([]);
-self.content = ko.observable();
-self.allResults = [];
 
 var food = {
   mexican: "mexican food",
@@ -36,15 +32,11 @@ geo.location = function(){
       });
     }
 }();
-console.log(geo.local.latitude + "fooBar");
-
 
 function initMap() {
       var userLocation = new google.maps.LatLng(geo.local.latitude, geo.local.longitude);
       console.log(geo.local.latitude);
       console.log(geo.local.longitude);
-
-
       map = new google.maps.Map(document.getElementById("map"), {
         center: userLocation,
         zoom: 11
@@ -58,29 +50,19 @@ function initMap() {
     openNow: true,
   }
 
-
-  console.log(queryL());
   infowindow = new google.maps.InfoWindow();
   service = new google.maps.places.PlacesService(map);
   service.textSearch(request, callback);
 }
-
-
-
     function callback(results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK){
           markerResults(results);
-          //console.log(markerResults);
-          //console.log(allResults);
           for (var j = 0; j < results.length; j++) {
             createMarker(results[j]);
             allResults.push(results[j]);
             }
-            console.log(allResults);
-
           }
         }
-
 
     function createMarker(place) {
       var marker = new google.maps.Marker({
@@ -88,8 +70,6 @@ function initMap() {
         animation: google.maps.Animation.DROP,
         position: place.geometry.location
       });
-
-
 
       google.maps.event.addListener(marker, "click", function(){
         map.setCenter(this.getPosition());
@@ -104,26 +84,6 @@ function initMap() {
       });
     }
 
-contentSet = function (data){
-  if (this.rating == undefined) {
-    return self.content("<div><strong>" +this.name + "</strong><br>" + this.formatted_address + "<br>");
-  } else {
-    return self.content("<div><strong>" + this.name + "</strong><br>" + this.formatted_address + "<br>" + "Stars: " + this.rating );
-  }
-}
-
-gotoMarker = function(clickedMarkerName){
-  var clickedName = clickedMarkerName.name;
-  for (var key in allResults) {
-    if (clickedName === allResults[key].name) {
-      map.panTo(allResults[key].geometry.location);
-      map.setZoom(11);
-      contentSet(allResults[key])
-      infowindow.open(map, allResults[key]);
-      console.log(allResults[key]);
-      }
-    }
-  }
 
 var viewModel = function() {
   var self = this;
@@ -132,7 +92,8 @@ var viewModel = function() {
   self.queryL = ko.observable("");
   self.typeL = ko.observable("");
   self.typeOfFood = ko.observable();
-  self.markerResults;
+  self.markerResults = ko.observableArray([]);
+  self.content = ko.observable();
 
 self.tacos = function() {
   self.queryL(self.food().mexican);
@@ -158,15 +119,25 @@ self.coffee = function() {
   self.initMap();
 };
 
+self.gotoMarker = function(clickedMarkerName){
+  var clickedName = clickedMarkerName.name;
+  for (var key in allResults) {
+    if (clickedName === allResults[key].name) {
+      map.panTo(allResults[key].geometry.location);
+      map.setZoom(11);
+      contentSet(allResults[key])
+      infowindow.open(map, allResults[key]);
+      console.log(allResults[key]);
+    }
+  }
+}
 
-
-  /*self.logMarker = function(clickedMarkerName){
-      var clickedName = clickedMarkerName;
-      for (var key in allResults) {
-      if (clickedName === allResults[key].name) {
-        console.log(self.allResults[key].geomerty.location);
+  self.contentSet = function(data){
+    if (this.rating == undefined) {
+          return self.content("<div><strong>" +this.name + "</strong><br>" + this.formatted_address + "<br>");
+        } else {
+          return self.content("<div><strong>" + this.name + "</strong><br>" + this.formatted_address + "<br>" + "Stars: " + this.rating );
+        }
       }
     }
-  }*/
-}
 ko.applyBindings(viewModel);

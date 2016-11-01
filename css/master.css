@@ -23,7 +23,7 @@ div.cusine {
   overflow-y: scroll;
 }
 
-span {
+li.marker-list span {
   color: white;
 }
 
@@ -37,14 +37,14 @@ span {
 }
 
 
-li {
+div.col-md-3 > ul > li {
   color: white;
   list-style: none;
   cursor: pointer;
 }
 
 li:hover {
-  opacity: .7; 
+  opacity: .7;
 }
 
 ul {
@@ -131,7 +131,13 @@ i {
   margin-top: -97vh;
   font-size: 20px;
   cursor: pointer;
-  border:
+  border:  1px solid black;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+i:hover {
+  opacity: 0.5;
 }
 
 @media screen and (min-width: 767px) {
@@ -139,8 +145,32 @@ i {
     display: none !important;
     visibility: hidden !important;
     }
+    #mobile-list {
+      display: none !important;
+      visibility: hidden !important;
+    }
 }
 
 #mobile-list {
-  display: none !important;
+  background-color: #ffffff;
+  height: 100vh;
+  overflow-y: scroll;
+  z-index: 999;
+  color: black !important;
+  margin: -100vh auto auto auto;
+  max-width: 33%;
+  position: absolute;
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+  list-style: none;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+div.menu:hover {
+  opacity: 0.7;
 }
