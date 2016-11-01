@@ -82,6 +82,8 @@ function initMap() {
         infowindow.setContent(content());
         infowindow.open(map, this);
       });
+      place.marker = marker;
+      console.log(marker)
     }
 
 
@@ -125,18 +127,19 @@ self.gotoMarker = function(clickedMarkerName){
     if (clickedName === allResults[key].name) {
       map.panTo(allResults[key].geometry.location);
       map.setZoom(11);
-      contentSet(allResults[key])
-      infowindow.open(map, allResults[key]);
-      console.log(allResults[key]);
+      contentSet(allResults[key].marker)
+      infowindow.open(map, allResults[key].marker);
+      console.log(allResults[key].marker);
     }
+    console.log(allResults[key].marker);
   }
 }
 
   self.contentSet = function(data){
     if (this.rating == undefined) {
-          return self.content("<div><strong>" +this.name + "</strong><br>" + this.formatted_address + "<br>");
+          return self.content("<div><strong>" + this.marker.name + "</strong><br>" + this.marker.formatted_address + "<br>");
         } else {
-          return self.content("<div><strong>" + this.name + "</strong><br>" + this.formatted_address + "<br>" + "Stars: " + this.rating );
+          return self.content("<div><strong>" + this.marker.name + "</strong><br>" + this.marker.formatted_address + "<br>" + "Stars: " + this.marker.rating );
         }
       }
     }
