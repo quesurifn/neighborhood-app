@@ -121,25 +121,26 @@ self.coffee = function() {
   self.initMap();
 };
 
-self.gotoMarker = function(clickedMarkerName){
-  var clickedName = clickedMarkerName.name;
+self.gotoMarker = function(clickedMarkerLocation){
+  var clickedLocation = clickedMarkerLocation.geometry.location;
   for (var key in allResults) {
-    if (clickedName === allResults[key].name) {
+    if (clickedLocation === allResults[key].geometry.location) {
       map.panTo(allResults[key].geometry.location);
       map.setZoom(11);
-      contentSet(allResults[key].marker)
+      contentSet(allResults[key])
+      infowindow.setContent(self.content());
       infowindow.open(map, allResults[key].marker);
-      console.log(allResults[key].marker);
     }
-    console.log(allResults[key].marker);
   }
 }
 
   self.contentSet = function(data){
-    if (this.rating == undefined) {
-          return self.content("<div><strong>" + this.marker.name + "</strong><br>" + this.marker.formatted_address + "<br>");
+    if (data.rating == undefined) {
+          console.log(data.name);
+          return content = ("<div><strong>" + data.name + "</strong><br>" + data.formatted_address + "<br>");
         } else {
-          return self.content("<div><strong>" + this.marker.name + "</strong><br>" + this.marker.formatted_address + "<br>" + "Stars: " + this.marker.rating );
+          console.log(data.name);
+          return content("<div><strong>" + data.name + "</strong><br>" + data.formatted_address + "<br>" + "Stars: " + data.rating);
         }
       }
     }
