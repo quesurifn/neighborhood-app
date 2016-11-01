@@ -126,7 +126,7 @@ self.gotoMarker = function(clickedMarkerLocation){
   for (var key in allResults) {
     if (clickedLocation === allResults[key].geometry.location) {
       map.panTo(allResults[key].geometry.location);
-      map.setZoom(11);
+      map.setZoom(15);
       contentSet(allResults[key])
       infowindow.setContent(self.content());
       infowindow.open(map, allResults[key].marker);
