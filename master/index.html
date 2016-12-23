@@ -32,6 +32,7 @@
           <div class="menu"><a data-toggle="collapse" href="#mobile-list" aria-expanded="false" aria-controlls="mobile-list"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></a></div>
 
           <nav id="responsive-menu">
+            <input placeholder="Search.." type="search" data-bind="" autofocus="off" />
             <ul data-bind="foreach: markerResults" id="mobile-list" class="collapse">
               <li data-bind="click: gotoMarker">
                 <strong data-bind="text: $data.name" ></strong>
@@ -46,7 +47,7 @@
 
 
         <div class="cusine text-center" data-bind="visible: food">
-          <button type="button" data-bind="click: coffee" class="btn">Coffee</button>
+          <button type="button" data-bind="click: coffee" class="btn" id="default">Coffee</button>
           <button type="button" data-bind="click: tacos" class="btn">Tacos</button>
           <button type="button" data-bind="click: pizza" class="btn">Pizza</button>
         </div>
@@ -62,6 +63,5 @@
 <script async
    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb93XLBWJZDwVI0oHxvJShMejbxhdEp4w&c&libraries=places,visualization">
 </script>
-
 </body>
 </html>
